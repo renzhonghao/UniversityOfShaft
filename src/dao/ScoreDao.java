@@ -2,9 +2,11 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
-import org.eclipse.jdt.internal.compiler.batch.Main;
 
 import entity.ScoreEntity;
 import util.DBUtil;
@@ -18,7 +20,6 @@ public class ScoreDao {
 		// 连接数据库
 		Connection connection = null;
 		try {
-			System.out.println("进入");
 			connection = DBUtil.getConnection();
 			// 把自动提交事务设置为FALSE
 			connection.setAutoCommit(false);
@@ -28,7 +29,6 @@ public class ScoreDao {
 					.append("(?, ?, ?,?)");
 			PreparedStatement ps = connection.prepareStatement(sql.toString());
 			for (int i = 0; i < Score.length; i++) {
-				System.out.println(i);
 				ps.setString(1, Score[i].getSC_CourseName());
 				ps.setString(2, String.valueOf(Score[i].getSC_Term()));
 				ps.setString(3, Score[i].getStu_SNo());
@@ -58,6 +58,39 @@ public class ScoreDao {
 
 	}
 	
+	/**
+	 * 根据学号查找日志 用于显示成绩列表
+	 * @param sno 学号
+	 * @param type 权限
+	 * @return
+	 * @throws Exception
+	 */
+	public List<ScoreEntity> selectByNo(String sno) throws Exception {
+		List<ScoreEntity> delist = new LinkedList<>();
+		Connection connection = DBUtil.getConnection();
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select * from t_stuscore where Stu_SNo=? order by SC_Term");
+		PreparedStatement ps = connection.prepareStatement(sql.toString());
+		ps.setString(1, sno);
+		ResultSet rs = ps.executeQuery(); //得到结果
+		while(rs.next()) {
+			delist.add(this.rowsEntity(rs));
+		}
+		return delist;
+	}
 	
-
+	/**
+	 * 打印数据
+	 * @param rs
+	 * @return
+	 * @throws SQLException
+	 */
+	private ScoreEntity rowsEntity(ResultSet rs) throws SQLException {
+		ScoreEntity de = new ScoreEntity();
+		de.setSC_CourseName(rs.getString("SC_CourseName"));
+		de.setSC_Score(rs.getDouble("SC_Score"));
+		de.setSC_Term((rs.getString("SC_Term").charAt(0)));
+		de.setStu_SNo(rs.getString("Stu_SNo"));
+		return de;
+	}
 }

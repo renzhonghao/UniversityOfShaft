@@ -72,10 +72,10 @@
 		<%
 			String name = "as";
 			boolean has = false;
-			String username=request.getParameter("username");
-			if(!username.equals(null)){
+			String user=request.getParameter("username");
+			if(!user.equals(null)){
 				has=true;
-				name=username;				
+				name=user;				
 			}
 			Cookie Cookies[] = request.getCookies();
 			if (Cookies != null) {
@@ -282,7 +282,7 @@
 						href="PersonalData.jsp" target="mainFrame"
 						onclick="javascript:changetitle('个人资料',this)"><i
 							class="fa fa-dashboard"></i> 个人资料</a></li>
-					<li><a id="qw" href="ScoreQuery.jsp"
+					<li><a id="qw" href="/UniversityOfShaft/Queryallscore.do"
 						class="waves-effect waves-dark" name="lead" target="mainFrame"
 						onclick="javascript:changetitle('成绩查询',this)"><i
 							class="fa fa-desktop"></i> 成绩查询</a></li>
@@ -331,7 +331,7 @@
 		<!-- /. NAV SIDE  -->
 
 		<iframe src="${path}jsp/PersonalData.jsp" id="mainFrame"
-			name="mainFrame" width="100%" scrolling="no" frameborder="no"></iframe>
+			name="mainFrame" width="100%" frameborder="no"></iframe>
 		<!-- /. PAGE WRAPPER  -->
 	</div>
 	<!-- /. WRAPPER  -->
