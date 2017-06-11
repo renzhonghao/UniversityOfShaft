@@ -80,6 +80,28 @@ public class ScoreDao {
 	}
 	
 	/**
+	 * 根据学号查找日志 用于显示成绩列表
+	 * @param sno 学号
+	 * @param type 权限
+	 * @return
+	 * @throws Exception
+	 */
+	public List<ScoreEntity> selectByNoandTerm(String sno,String term) throws Exception {
+		List<ScoreEntity> delist = new LinkedList<>();
+		Connection connection = DBUtil.getConnection();
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select * from t_stuscore where Stu_SNo=? and SC_Term=?");
+		PreparedStatement ps = connection.prepareStatement(sql.toString());
+		ps.setString(1, sno);
+		ps.setString(2, term);
+		ResultSet rs = ps.executeQuery(); //得到结果
+		while(rs.next()) {
+			delist.add(this.rowsEntity(rs));
+		}
+		return delist;
+	}
+	
+	/**
 	 * 打印数据
 	 * @param rs
 	 * @return

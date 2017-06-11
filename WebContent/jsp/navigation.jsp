@@ -286,7 +286,7 @@
 						class="waves-effect waves-dark" name="lead" target="mainFrame"
 						onclick="javascript:changetitle('成绩查询',this)"><i
 							class="fa fa-desktop"></i> 成绩查询</a></li>
-					<li><a href="ScoreAnalysis.jsp"
+					<li><a href="/UniversityOfShaft/Analysisscore.do?term=1"
 						class="waves-effect waves-dark" name="lead" target="mainFrame"
 						onclick="javascript:changetitle('成绩分析',this)"><i
 							class="fa fa-bar-chart-o"></i> 成绩分析</a></li>
@@ -316,7 +316,6 @@
 									<li><a href="#">三级链接</a></li>
 									<li><a href="#">三级链接</a></li>
 									<li><a href="#">三级链接</a></li>
-
 								</ul></li>
 						</ul></li>
 					<li><a href="empty.jsp" class="waves-effect waves-dark"
@@ -324,7 +323,6 @@
 						onclick="javascript:changetitle('空白页',this)"><i
 							class="fa fa-fw fa-file"></i> 空白页 </a></li>
 				</ul>
-
 			</div>
 
 		</nav>
